@@ -1,1 +1,51 @@
-jbdjsabjkbasjkb
+import RPi.GPIO as GPIO
+import time
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(16,GPIO.IN)
+GPIO.setup(18,GPIO.OUT)
+init_tiempo=time.time()
+archivo=open("distancia.txt","w")
+while True:
+    GPIO.output(18,1)
+    time.sleep(0.000001)
+    GPIO.output(18,0)
+    inicio=time.time()
+    while(GPIO.input(16)==GPIO.LOW):
+        inicio=time.time()
+    while(GPIO.input(16)==GPIO.HIGH):
+        final=time.time()
+    tiempo=final-inicio
+    distancia=tiempo*34000/2
+    if distancia>=2 and distancia<=400:
+       archivo.write("distancia: "+str(distancia)+chr(10))
+       print(distancia)
+    if (time.time()-init_tiempo)>=30:
+       break
+archivo.close()
+print("PROGRAMA HA FINALIZADO")import RPi.GPIO as GPIO
+import time
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(16,GPIO.IN)
+GPIO.setup(18,GPIO.OUT)
+init_tiempo=time.time()
+archivo=open("distancia.txt","w")
+while True:
+    GPIO.output(18,1)
+    time.sleep(0.000001)
+    GPIO.output(18,0)
+    inicio=time.time()
+    while(GPIO.input(16)==GPIO.LOW):
+        inicio=time.time()
+    while(GPIO.input(16)==GPIO.HIGH):
+        final=time.time()
+    tiempo=final-inicio
+    distancia=tiempo*34000/2
+    if distancia>=2 and distancia<=400:
+       archivo.write("distancia: "+str(distancia)+chr(10))
+       print(distancia)
+    if (time.time()-init_tiempo)>=30:
+       break
+archivo.close()
+print("PROGRAMA HA FINALIZADO")
