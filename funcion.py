@@ -54,7 +54,7 @@ def ultrasonico():
             archivo.write("distancia: "+str(distancia)+chr(10))
             print(distancia)
         if (time.time()-init_tiempo)>=30:
-        break
+            break
     archivo.close()
     print("PROGRAMA HA FINALIZADO")
     import RPi.GPIO as GPIO
@@ -80,7 +80,7 @@ def ultrasonico():
             archivo.write("distancia: "+str(distancia)+chr(10))
             print(distancia)
         if (time.time()-init_tiempo)>=30:
-        break
+            break
     archivo.close()
     print("PROGRAMA HA FINALIZADO")
     
