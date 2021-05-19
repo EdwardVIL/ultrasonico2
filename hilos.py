@@ -18,10 +18,10 @@ def servo():
         while True: 
             #start PWM running, but with value of 0 (pulse off)
             servo1.start(0)
-            print ("Waiting for 2 seconds")
+            print ("Inicio de servo")
             time.sleep(2)
             #Let's move the servo!
-            print ("Rotating 180 degrees in 10 steps")
+            print ("Rotando 180")
             # Define variable duty
             duty = 2
             # Loop for duty values from 2 to 12 (0 to 180 degrees)
@@ -32,40 +32,49 @@ def servo():
             # Wait a couple of seconds
             time.sleep(2)
             # Turn back to 90 degrees
-            print ("Turning back to 90 degrees for 2 seconds")
+            print ("regresando a 90")
             servo1.ChangeDutyCycle(7)
             time.sleep(2)
             #turn back to 0 degrees
-            print ("Turning back to 0 degrees")
+            print ("regresando a 0")
             servo1.ChangeDutyCycle(2)
             time.sleep(0.5)
             servo1.ChangeDutyCycle(0)
             #Clean things up at the end
             servo1.stop()
             GPIO.cleanup()
-            print ("Goodbye")
+            print ("Fin de servo")
     finally:
         GPIO.cleanup()
 
 
 def ultrasonico():
     try:
-        print("Medicion de distancias en progreso")
+        #print("Medicion de distancias en progreso")
     
         while True:
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(TRIG, GPIO.OUT)
+            GPIO.setup(ECHO, GPIO.IN)
             GPIO.output(TRIG, GPIO.LOW)
-            print("Esperando a que el sensor se estabilice")
+            #print("Esperando a que el sensor se estabilice")
             time.sleep(2)
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(TRIG, GPIO.OUT)
             GPIO.output(TRIG, GPIO.HIGH)
             time.sleep(0.00001)
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(TRIG, GPIO.OUT)
             GPIO.output(TRIG, GPIO.LOW)
-            print("Iniciando eco")
-            while True:
+            #print("Iniciando eco")
+            while True:  
                 pulso_inicio = time.time()
+                GPIO.setup(ECHO, GPIO.IN)
                 if GPIO.input(ECHO) == GPIO.HIGH:
                     break
             while True:
                 pulso_fin = time.time()
+                GPIO.setup(ECHO, GPIO.IN)
                 if GPIO.input(ECHO) == GPIO.LOW:
                     break
             duracion = pulso_fin - pulso_inicio
