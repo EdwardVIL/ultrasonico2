@@ -43,8 +43,8 @@ def servo():
             time.sleep(0.5)
             servo1.ChangeDutyCycle(0)
             #Clean things up at the end
-            servo1.stop()
-            GPIO.cleanup()
+            #servo1.stop()
+            #GPIO.cleanup()
             print ("Fin de servo")
     finally:
         GPIO.cleanup()
