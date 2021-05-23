@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 import time
 import threading
+from picamera import PiCamera
+from time import sleep
 GPIO.setwarnings(False)
 init_tiempo=time.time()
 TRIG = 18
@@ -41,7 +43,7 @@ def servo():
             print ("regresando a 0")
             servo1.ChangeDutyCycle(2)
             time.sleep(0.5)
-            servo1.ChangeDutyCycle(0)
+            servo1.ChangeDutyCycle(2)
             #Clean things up at the end
             #servo1.stop()
             #GPIO.cleanup()
@@ -82,9 +84,19 @@ def ultrasonico():
             duracion = pulso_fin - pulso_inicio
             distancia = (34300 * duracion) / 2
             print("Distancia: %.2f cm" % distancia)
+            if distancia <= 120:
+                camara
+                print ("si furula")
 
     finally:
         GPIO.cleanup()
+
+
+def camara():
+    camara = PiCamera()
+    camara.start_preview()
+    sleep(100)
+    camara.stop_preview()
 
 
 
